@@ -412,3 +412,19 @@ footer {
     display: none;
   }
 }
+/* width */
+::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+  opacity: 0.8;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background-color: var(--dark-gray);
+  border-radius: 10px;
+}
