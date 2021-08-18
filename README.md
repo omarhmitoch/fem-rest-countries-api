@@ -1,8 +1,8 @@
-# Frontend Mentor - REST Countries API with color theme switcher solution
+# Frontend Mentor - REST Countries API with color theme switcher
 
 ![](./screenshot.jpg)
 
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- [Live Site URL](https://jolly-turing-2254cc.netlify.app)
 
 ### Built with
 
