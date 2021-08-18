@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/c.css" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <title></title>
+  </head>
+  <body>
+    <nav role="navigation">
+      <div class="nav-container">
+        <h2>Where in the world?</h2>
+        <a class="dark-mode" href="#" aria-label="toggle dark or light mode">
+          <span class="icon-light icon">
+            <ion-icon name="moon-outline"></ion-icon>
+          </span>
+          <span class="icon-night icon">
+            <ion-icon name="moon"></ion-icon>
+          </span>
+          <span class="d-mode">Dark Mode</span>
+        </a>
+      </div>
+    </nav>
+
+    <div class="country-container" role="main">
+      <div class="back-btn">
+        <a href="./index.html" aria-label="Go back to the main page"
+          ><span><ion-icon name="arrow-back-outline"></ion-icon></span>Back</a
+        >
+      </div>
+      <div class="country-info-container">
+        <div class="error-case">
+          <div class="err-left">
+            <h3>Oops!</h3>
+            <p>We can't seem to find the page you're looking for</p>
+            <a href="./index.html" aria-label="Go back to the main page"
+              ><span
+                ><ion-icon
+                  name="arrow-back-outline"
+                  alt="arrow icon"
+                ></ion-icon></span
+              >Back</a
+            >
+          </div>
+          <div class="err-right">
+            <span>4</span>
+            <img src="images/earth.gif" alt="earth rotating gif" />
+            <span>4</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer role="contentinfo">
+      <div class="attribution">
+        Challenge by
+        <a
+          href="https://www.frontendmentor.io/challenges/rest-countries-api-with-color-theme-switcher-5cacc469fec04111f7b848ca"
+          target="_blank"
+          aria-label="Check out the frontend mentor challenge"
+          >Frontend Mentor</a
+        >. Coded by
+        <a
+          target="_blank"
+          href="https://github.com/omarhmitoch"
+          aria-label="Check my personal github"
+          >Omar</a
+        >
+      </div>
+    </footer>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+    <script src="js/country.js"></script>
+  </body>
+</html>

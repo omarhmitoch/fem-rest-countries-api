@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+
+    <link rel="stylesheet" href="styles/main.css" />
+    <title>Frontend Mentor | REST Countries API</title>
+  </head>
+  <body>
+    <nav role="navigation">
+      <div class="nav-container">
+        <h2>Where in the world?</h2>
+        <a class="dark-mode" href="#" aria-label="toggle dark or light mode">
+          <span class="icon-light icon">
+            <ion-icon name="moon-outline"></ion-icon>
+          </span>
+          <span class="icon-night icon">
+            <ion-icon name="moon"></ion-icon>
+          </span>
+          <span class="d-mode">Dark Mode</span>
+        </a>
+      </div>
+    </nav>
+
+    <section role="main">
+      <div class="main">
+        <div class="inputs-container">
+          <div class="text-input">
+            <input type="text" placeholder="Search for a country..." />
+            <span
+              ><ion-icon class="whet" name="search-outline"></ion-icon
+            ></span>
+          </div>
+          <div class="select-input">
+            <a href="#" id="select-btn" aria-label="filter countries by region"
+              ><span class="select-btn-span">Filter by Region</span>
+              <ion-icon
+                name="chevron-down-outline"
+                class="select-btn-icon"
+              ></ion-icon>
+            </a>
+            <ul class="select-ul"></ul>
+          </div>
+        </div>
+        <div class="error-container">
+          <p>No results for <span>"Test"</span></p>
+        </div>
+        <div class="countries-container"></div>
+
+        <div class="show-more">
+          <div class="link-c">
+            <a
+              href=""
+              id="showMore"
+              aria-label="load more countries on main page"
+              >Show more</a
+            >
+            <span><img src="images/earth.gif" alt="earth rotating gif" /></span>
+          </div>
+        </div>
+      </div>
+
+      <footer role="contentinfo">
+        <div class="attribution">
+          Challenge by
+          <a
+            href="https://www.frontendmentor.io/challenges/rest-countries-api-with-color-theme-switcher-5cacc469fec04111f7b848ca"
+            target="_blank"
+            aria-label="Check out the frontend mentor challenge"
+            >Frontend Mentor</a
+          >. Coded by
+          <a
+            target="_blank"
+            href="https://github.com/omarhmitoch"
+            aria-label="Check my personal github"
+            >Omar</a
+          >
+        </div>
+      </footer>
+    </section>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
