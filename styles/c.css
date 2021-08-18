@@ -107,7 +107,7 @@ nav {
   display: block;
 }
 .dark-mode .d-mode {
-  font-weight: 800;
+  font-weight: 600;
   font-size: 14.5px;
   color: var(--text-color);
 }
