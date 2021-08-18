@@ -2,7 +2,7 @@
 
 ![](./screenshot.jpg)
 
-- Live Site URL: [https://jolly-turing-2254cc.netlify.app]
+- [Live Site URL](https://jolly-turing-2254cc.netlify.app)
 
 ### Built with
 
