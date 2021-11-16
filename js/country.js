@@ -7,7 +7,6 @@ const getCountry = (cCode) => {
   return fetch(`https://restcountries.com/v2/alpha/${cCode}`)
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       return data;
     })
     .catch((error) =>
@@ -19,9 +18,21 @@ const fillData = async () => {
   let countries;
   let data = await getCountry(countryParam);
   if (data.status !== 400) {
-    Promise.all(data.borders.map(getCountry)).then((countries) => {
-      document.title = `${data.name} - detailed information`;
-      countryContainer.innerHTML = `
+    if (data.borders) {
+      Promise.all(data.borders.map(getCountry)).then((countries) => {
+        changeData(countries, data);
+      });
+    } else {
+      changeData(countries, data);
+    }
+  } else {
+    errorContainer.classList.add("show");
+  }
+};
+
+const changeData = (countries, data = "") => {
+  document.title = `${data.name} - detailed information`;
+  countryContainer.innerHTML = `
             <div class="left-section">
             <img src="${data.flag}" alt="The flag of ${data.name}">
         </div>
@@ -58,7 +69,7 @@ const fillData = async () => {
             </div>
             <div class="border-countries">
             ${
-              countries.length > 0
+              countries?.length > 0
                 ? countries
                     .map((c) => {
                       return `<a href="./c.html?country=${c.alpha2Code}">${c.name}</a>`;
@@ -71,10 +82,6 @@ const fillData = async () => {
          </div>
         </div>
             `;
-    });
-  } else {
-    errorContainer.classList.add("show");
-  }
 };
 
 /* light/dark theme toggle */

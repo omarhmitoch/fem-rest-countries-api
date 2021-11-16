@@ -76,7 +76,6 @@ const getCountries = () => {
     .then((response) => response.json())
     .then((data) => {
       countries = data;
-      console.log(countries);
       manageCountriesCount();
     })
     .catch((err) => console.log("error : ", err));
@@ -135,7 +134,6 @@ const filterByRegion = (region, arr) => {
         country.region.toLowerCase().trim() === region.toLowerCase().trim()
     )
     .forEach((c) => {
-      console.log(c);
       addCountryToPage(
         c.name.common,
         c.population,
@@ -191,7 +189,6 @@ input.addEventListener("input", function () {
       errorContainer.classList.remove("active");
       selectContainer.classList.remove("hide");
       filterByRegion(choice, countries);
-      console.log(choice);
     }
   }
 });
