@@ -72,10 +72,11 @@ const countriesContainer = document.querySelector(".countries-container");
 let countries, countryName, population, region, capital, flag;
 const showMoreBtn = document.querySelector("#showMore");
 const getCountries = () => {
-  fetch("https://restcountries.eu/rest/v2/all")
+  fetch("https://restcountries.com/v3.1/all")
     .then((response) => response.json())
     .then((data) => {
       countries = data;
+      console.log(countries);
       manageCountriesCount();
     })
     .catch((err) => console.log("error : ", err));
@@ -87,14 +88,21 @@ getCountries();
 const manageCountriesCount = () => {
   for (i; i < count; i++) {
     if (countries[i] !== undefined) {
-      ({ name: countryName, population, region, capital, flag,alpha2Code } = countries[i]);
-      addCountryToPage(countryName, population, region, capital, flag,alpha2Code);
+      ({
+        name: { common },
+        population,
+        region,
+        capital,
+        flags: { png: flag },
+        cca2: alphaCode,
+      } = countries[i]);
+      addCountryToPage(common, population, region, capital, flag, alphaCode);
     } else {
       showMoreBtn.classList.add("hide");
     }
   }
 };
-const addCountryToPage = (cName, cPop, cReg, cCap, cFlag,alphaCode) => {
+const addCountryToPage = (cName, cPop, cReg, cCap, cFlag = "", alphaCode) => {
   countriesContainer.innerHTML += `
     <div class="country-card" data-alpha-code=${alphaCode}>
 <div class="img-c">
@@ -127,7 +135,15 @@ const filterByRegion = (region, arr) => {
         country.region.toLowerCase().trim() === region.toLowerCase().trim()
     )
     .forEach((c) => {
-      addCountryToPage(c.name, c.population, c.region, c.capital, c.flag,c.alpha2Code);
+      console.log(c);
+      addCountryToPage(
+        c.name.common,
+        c.population,
+        c.region,
+        c.capital,
+        c.flags.png,
+        c.cca2
+      );
     });
 };
 
@@ -142,10 +158,19 @@ input.addEventListener("input", function () {
     countriesContainer.innerHTML = "";
     showMoreBtn.className = "hide";
     let arr = countries.filter((country) => {
-      return country.name.toLowerCase().indexOf(value) === 0 ? true : false;
+      return country.name.common.toLowerCase().indexOf(value) === 0
+        ? true
+        : false;
     });
     arr.forEach((c) => {
-      addCountryToPage(c.name, c.population, c.region, c.capital, c.flag,c.alpha2Code);
+      addCountryToPage(
+        c.name.common,
+        c.population,
+        c.region,
+        c.capital,
+        c.flags.png,
+        c.cca2
+      );
     });
     if (arr.length === 0) {
       errorContainer.classList.add("active");
@@ -171,52 +196,47 @@ input.addEventListener("input", function () {
   }
 });
 
-
-
 /* select country  */
 
 countriesContainer.addEventListener("click", function (e) {
-  let countryCode = e.target.closest(".country-card").getAttribute("data-alpha-code");
+  let countryCode = e.target
+    .closest(".country-card")
+    .getAttribute("data-alpha-code");
   window.location = `./c.html?country=${countryCode}`;
-})
-
-
-
+});
 
 /* light/dark theme toggle */
 let themeState = false;
 let storedLocalTheme = localStorage.getItem("theme-saved");
 document.querySelector(".dark-mode").addEventListener("click", function (e) {
-    e.preventDefault();
-    themeState = !themeState;
-    updateTheme(themeState);
+  e.preventDefault();
+  themeState = !themeState;
+  updateTheme(themeState);
 });
 
 const updateTheme = (boolVal) => {
-    if (boolVal) {
+  if (boolVal) {
     localStorage.setItem("theme-saved", JSON.stringify({ type: "dark" }));
     document.body.classList.add("dark-theme");
     document.querySelector(".icon-light").classList.add("active");
     document.querySelector(".icon-night").classList.add("active");
-    } else {
-    localStorage.setItem("theme-saved" , JSON.stringify({type:"light"}));
+  } else {
+    localStorage.setItem("theme-saved", JSON.stringify({ type: "light" }));
     document.body.classList.remove("dark-theme");
     document.querySelector(".icon-light").classList.remove("active");
     document.querySelector(".icon-night").classList.remove("active");
   }
 };
 
-
 /* change theme based on the saved theme choice in Local Storage*/
 const LocalTheme = () => {
-    if (storedLocalTheme !== null) {
-        if (JSON.parse(storedLocalTheme).type === "dark") {
-            updateTheme(true);
-        }
-        else {
-            updateTheme(false);
-            }
-    } 
-}
+  if (storedLocalTheme !== null) {
+    if (JSON.parse(storedLocalTheme).type === "dark") {
+      updateTheme(true);
+    } else {
+      updateTheme(false);
+    }
+  }
+};
 
 LocalTheme();

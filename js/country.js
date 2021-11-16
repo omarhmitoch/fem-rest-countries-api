@@ -4,9 +4,10 @@ const errorContainer = document.querySelector(".error-case");
 
 const getCountry = (cCode) => {
   let countryData;
-  return fetch(`https://restcountries.eu/rest/v2/alpha/${cCode}`)
+  return fetch(`https://restcountries.com/v2/alpha/${cCode}`)
     .then((response) => response.json())
     .then((data) => {
+      console.log(data);
       return data;
     })
     .catch((error) =>
@@ -18,8 +19,8 @@ const fillData = async () => {
   let countries;
   let data = await getCountry(countryParam);
   if (data.status !== 400) {
-      Promise.all(data.borders.map(getCountry)).then((countries) => {
-          document.title = `${data.name} - detailed information`
+    Promise.all(data.borders.map(getCountry)).then((countries) => {
+      document.title = `${data.name} - detailed information`;
       countryContainer.innerHTML = `
             <div class="left-section">
             <img src="${data.flag}" alt="The flag of ${data.name}">
@@ -56,10 +57,15 @@ const fillData = async () => {
             <span>Border Countries: </span>
             </div>
             <div class="border-countries">
-            ${countries.length>0 ? countries.map((c) => {
-            return `<a href="./c.html?country=${c.alpha2Code}">${c.name}</a>`;
-            })
-          .join("") : "<p>No border Countries</p> "}
+            ${
+              countries.length > 0
+                ? countries
+                    .map((c) => {
+                      return `<a href="./c.html?country=${c.alpha2Code}">${c.name}</a>`;
+                    })
+                    .join("")
+                : "<p>No border Countries</p> "
+            }
             
          </div>
          </div>
@@ -75,37 +81,35 @@ const fillData = async () => {
 let themeState = false;
 let storedLocalTheme = localStorage.getItem("theme-saved");
 document.querySelector(".dark-mode").addEventListener("click", function (e) {
-    e.preventDefault();
-    themeState = !themeState;
-    updateTheme(themeState);
+  e.preventDefault();
+  themeState = !themeState;
+  updateTheme(themeState);
 });
 
 const updateTheme = (boolVal) => {
-    if (boolVal) {
+  if (boolVal) {
     localStorage.setItem("theme-saved", JSON.stringify({ type: "dark" }));
     document.body.classList.add("dark-theme");
     document.querySelector(".icon-light").classList.add("active");
     document.querySelector(".icon-night").classList.add("active");
-    } else {
-    localStorage.setItem("theme-saved" , JSON.stringify({type:"light"}));
+  } else {
+    localStorage.setItem("theme-saved", JSON.stringify({ type: "light" }));
     document.body.classList.remove("dark-theme");
     document.querySelector(".icon-light").classList.remove("active");
     document.querySelector(".icon-night").classList.remove("active");
   }
 };
 
-
 /* change theme based on the saved theme choice in Local Storage*/
 const LocalTheme = () => {
-    if (storedLocalTheme !== null) {
-        if (JSON.parse(storedLocalTheme).type === "dark") {
-            updateTheme(true);
-        }
-        else {
-            updateTheme(false);
-            }
-    } 
-}
+  if (storedLocalTheme !== null) {
+    if (JSON.parse(storedLocalTheme).type === "dark") {
+      updateTheme(true);
+    } else {
+      updateTheme(false);
+    }
+  }
+};
 
 LocalTheme();
 fillData(countryParam);
